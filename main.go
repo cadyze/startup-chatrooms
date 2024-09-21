@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"net/http"
+	"startup-chatrooms/chat"
+)
 
 func main() {
-    fmt.Println("Hello, World!")
+	// Register WebSocket handler
+	http.HandleFunc("/ws", chat.HandleWebSocket)
+
+	log.Println("WebSocket server running on :8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
